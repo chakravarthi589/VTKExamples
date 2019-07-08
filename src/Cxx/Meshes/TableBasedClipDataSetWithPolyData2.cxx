@@ -48,31 +48,35 @@
 // cubic cell at each point. A checkerboard pattern is used for
 // simplicity.
 
-vtkSmartPointer<vtkRectilinearGrid> makeImage(int n) {
+vtkSmartPointer<vtkRectilinearGrid> makeImage(int n)
+{
   // This is a simplification of a program that uses actual image data
   // as a source for the rectilinear grid.  In order to recreate the
   // same vtk calls, create a dummy image here.
-  vtkSmartPointer<vtkImageData> image0 = vtkSmartPointer<vtkImageData>::New();
+  auto image0 = vtkSmartPointer<vtkImageData>::New();
   image0->SetDimensions(n, n, n);
   image0->AllocateScalars(VTK_UNSIGNED_CHAR, 1);
   image0->SetSpacing(CUBESIZE/n, CUBESIZE/n, CUBESIZE/n);
   int checkerSize = n / 8;
-  for(int z=0; z<n; z++) {
-    for(int y=0; y<n; y++) {
-      for(int x=0; x<n; x++) {
+  for(int z=0; z<n; z++)
+  {
+    for(int y=0; y<n; y++)
+    {
+      for(int x=0; x<n; x++)
+      {
 	unsigned char *ptr = (unsigned char*) image0->GetScalarPointer(x, y, z);
 	*ptr = (x/checkerSize+y/checkerSize+z/checkerSize)%2; // checkerboard
       }
     }
   }
   
-  vtkSmartPointer<vtkLookupTable> lut = vtkSmartPointer<vtkLookupTable>::New();
+  auto lut = vtkSmartPointer<vtkLookupTable>::New();
   lut->SetNumberOfTableValues(2);
   lut->SetTableRange(0, 1);
   lut->SetTableValue(0, IMAGE_R, IMAGE_G, IMAGE_B, IMAGE_A);
   lut->SetTableValue(1, DIM*IMAGE_R, DIM*IMAGE_G, DIM*IMAGE_B, IMAGE_A);
 
-  vtkSmartPointer<vtkImageMapToColors> map =
+  auto map =
     vtkSmartPointer<vtkImageMapToColors>::New();
   map->SetLookupTable(lut);
   map->SetOutputFormatToRGBA();
@@ -83,7 +87,7 @@ vtkSmartPointer<vtkRectilinearGrid> makeImage(int n) {
   // Convert the image to a rectilinear grid.  Each point in the image
   // becomes a cubic cell in the grid.
   
-  vtkSmartPointer<vtkRectilinearGrid> rectgrid =
+  auto rectgrid =
     vtkSmartPointer<vtkRectilinearGrid>::New();
 
   int extent[6];
@@ -93,18 +97,19 @@ vtkSmartPointer<vtkRectilinearGrid> makeImage(int n) {
   extent[5] += 1;
   rectgrid->SetExtent(extent);
 
-  vtkSmartPointer<vtkDoubleArray> xcoords =
+  auto xcoords =
     vtkSmartPointer<vtkDoubleArray>::New();
-  vtkSmartPointer<vtkDoubleArray> ycoords =
+  auto ycoords =
     vtkSmartPointer<vtkDoubleArray>::New();
-  vtkSmartPointer<vtkDoubleArray> zcoords =
+  auto zcoords =
     vtkSmartPointer<vtkDoubleArray>::New();
   xcoords->SetNumberOfValues(n+1);
   ycoords->SetNumberOfValues(n+1);
   zcoords->SetNumberOfValues(n+1);
   double spacing[3];
   image->GetSpacing(spacing);
-  for(vtkIdType i=0; i<=n; i++) {
+  for(vtkIdType i=0; i<=n; i++)
+  {
     xcoords->InsertValue(i, i*spacing[0]);
     ycoords->InsertValue(i, i*spacing[1]);
     zcoords->InsertValue(i, i*spacing[2]);
@@ -122,23 +127,25 @@ vtkSmartPointer<vtkRectilinearGrid> makeImage(int n) {
 /////////////////////
 ////////////////////
 
-int main(int, char *[]) {
+int main(int, char *[])
+{
 
   vtkMapper::SetResolveCoincidentTopologyToPolygonOffset();
   
-  vtkSmartPointer<vtkNamedColors> colors =
+  auto colors =
     vtkSmartPointer<vtkNamedColors>::New();
-  vtkSmartPointer<vtkRenderer> renderer = vtkSmartPointer<vtkRenderer>::New();
+  auto renderer = vtkSmartPointer<vtkRenderer>::New();
   renderer->SetBackground(colors->GetColor3d("Wheat").GetData());
+  renderer->UseHiddenLineRemovalOn();
 
-  vtkSmartPointer<vtkRenderWindow> renderWindow =
+  auto renderWindow =
     vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
   renderWindow->SetSize(640, 480);
 
-  vtkSmartPointer<vtkRenderWindowInteractor> interactor =
+  auto interactor =
     vtkSmartPointer<vtkRenderWindowInteractor>::New();
-  vtkSmartPointer<vtkInteractorStyleSwitch> style =
+  auto style =
     vtkSmartPointer<vtkInteractorStyleSwitch>::New();
   interactor->SetInteractorStyle(style);
   interactor->SetRenderWindow(renderWindow);
@@ -146,9 +153,9 @@ int main(int, char *[]) {
   vtkSmartPointer<vtkRectilinearGrid> image = makeImage(IMAGESIZE);
 
   // Clipping planes in the X and Y direction.
-  vtkSmartPointer<vtkDoubleArray> normals
+  auto normals
     = vtkSmartPointer<vtkDoubleArray>::New();
-  vtkSmartPointer<vtkPoints> clipPts = vtkSmartPointer<vtkPoints>::New();
+  auto clipPts = vtkSmartPointer<vtkPoints>::New();
   normals->SetNumberOfComponents(3);
   double xnorm[3] = {-1., 0., 0.};
   double ynorm[3] = {0., -1., 0.};
@@ -158,18 +165,19 @@ int main(int, char *[]) {
   normals->InsertNextTuple(ynorm);
   clipPts->InsertNextPoint(xpt);
   clipPts->InsertNextPoint(ypt);
-  vtkSmartPointer<vtkPlanes> clipPlanes = vtkSmartPointer<vtkPlanes>::New();
+
+  auto clipPlanes = vtkSmartPointer<vtkPlanes>::New();
   clipPlanes->SetNormals(normals);
   clipPlanes->SetPoints(clipPts);
 
-  vtkSmartPointer<vtkTableBasedClipDataSet> clipper =
+  auto clipper =
     vtkSmartPointer<vtkTableBasedClipDataSet>::New();
   clipper->SetClipFunction(clipPlanes);
   clipper->SetInputData(image);
 
-  vtkSmartPointer<vtkDataSetMapper> imageMapper =
+  auto imageMapper =
     vtkSmartPointer<vtkDataSetMapper>::New();
-  vtkSmartPointer<vtkActor> imageActor = vtkSmartPointer<vtkActor>::New();
+  auto imageActor = vtkSmartPointer<vtkActor>::New();
   imageActor->SetMapper(imageMapper);
   renderer->AddViewProp(imageActor);
   imageMapper->SetInputConnection(clipper->GetOutputPort());
@@ -181,5 +189,5 @@ int main(int, char *[]) {
   renderWindow->Render();
   
   interactor->Start();
-  return 0;
+  return EXIT_SUCCESS;
 }

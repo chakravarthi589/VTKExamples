@@ -51,6 +51,7 @@ These are fully independent, compilable examples. There is significant overlap i
 [ParticleReader](/Cxx/IO/ParticleReader) | vtkParticleReader | This example reads ASCII files where each line consists of points with its position (x,y,z) and (optionally) one scalar or binary files in RAW 3d file format.
 [ReadAllPolyDataTypes](/Cxx/IO/ReadAllPolyDataTypes) | vtkBYUReader vtkOBJReader vtkPLYReader vtkPolyDataReader vtkSTLReader vtkXMLPolyDataReader | Read any VTK polydata file.
 [ReadAllPolyDataTypesDemo](/Cxx/IO/ReadAllPolyDataTypesDemo) | vtkBYUReader vtkOBJReader vtkPLYReader vtkPolyDataReader vtkSTLReader vtkXMLPolyDataReader | Read all VTK polydata file types.
+[ReadAllUnstructuredGridTypes](/Cxx/IO/ReadAllUnstructuredGridTypes) | vtkXMLUnstructuredGridReader vtkUnstructuredGridReader | Read any VTK unstructuredgrid file.
 [ReadCML](/Cxx/IO/ReadCML) | vtkCMLMoleculeReader | Read Chemistry Markup Language files.
 [ReadExodusData](/Cxx/IO/ReadExodusData) | vtkExodusIIReader | Read and view ExodusII data.
 [ReadOBJ](/Cxx/IO/ReadOBJ) | vtkOBJReader | Read an OBJ (.obj) file.
@@ -68,6 +69,7 @@ These are fully independent, compilable examples. There is significant overlap i
 | Example Name | Classes Demonstrated | Description | Image |
 | -------------- | ---------------------- | ------------- | ------- |
 [3DSImporter](/Cxx/IO/3DSImporter) | vtk3DSImporter | Import a 3D Studio scene that includes multiple actors.
+[GLTFImporter](/Cxx/IO/GLTFImporter) | vtkGLTFImporter | Import a glTF scene.
 [ImportPolyDataScene](/Cxx/IO/ImportPolyDataScene) | vtkXMLMultiBlockDataReader vtkDataObjectTreeIterator | Import a polydata scene using multiblock datasets.
 [OBJImporter](/Cxx/IO/OBJImporter) | vtkOBJImporter | Import an OBJ scene that includes actors, materials and textures.
 [VRMLImporter](/Cxx/IO/VRMLImporter) | vtkVRMLImporter | Import a VRML 2.0 (WRL) file.
@@ -980,6 +982,8 @@ See [this tutorial](http://www.vtk.org/Wiki/VTK/Tutorials/3DDataTypes) for a bri
 [ExtrudePolyDataAlongLine](/Cxx/Visualization/ExtrudePolyDataAlongLine) | vtkRuledSurfaceFilter | Extrude a 2D polydata along a line in 3D space.
 [FastSplatter](/Cxx/Visualization/FastSplatter) | vtkFastSplatter | Convolve a splat image with every point in an input image.
 [FindCellIntersections](/Cxx/VisualizationAlgorithms/FindCellIntersections) | vtkCellLocator | Find the intersection of a line and the cells in an unstructured dataset
+[FireFlow](/Cxx/VisualizationAlgorithms/FireFlow) | vtkPointSource vtkStreamTracer vtkContourFilter vtkVRMLImporter vtkXMLUnstructuredGridReader| Combine geometry from a VRML file and a solution from a vtkUnstructuredGrid file.
+[FireFlowDemo](/Cxx/VisualizationAlgorithms/FireFlowDemo) | vtkPointSource vtkStreamTracer vtkContourFilter vtkVRMLImporter vtkXMLUnstructuredGridReader vtkSliderWidget| Combine geometry from a VRML file and a solution from a vtkUnstructuredGrid file (interactive).
 [FlatShading](/Cxx/Visualization/FlatShading) | vtkActor |
 [FlyingFrogSkinAndTissue](/Cxx/Visualization/FlyingFrogSkinAndTissue) | vtkMetaImageReader vtkFlyingEdges3D vtkWindowedSincPolyDataFilter vtkImageGaussianSmooth | All frog parts and translucent skin.
 [FlyingFrogSkinAndTissueB](/Cxx/Visualization/FlyingFrogSkinAndTissueB) | vtkMetaImageReader vtkFlyingEdges3D vtkWindowedSincPolyDataFilter vtkImageGaussianSmooth | All frog parts and translucent skin.
@@ -1124,9 +1128,10 @@ See [this tutorial](http://www.vtk.org/Wiki/VTK/Tutorials/3DDataTypes) for a bri
 [DoubleClick](/Cxx/Interaction/DoubleClick) | vtkInteractorStyleTrackballCamera | Catch a double click.
 [EllipticalButton](/Cxx/Interaction/EllipticalButton) | vtkEllipticalButtonSource vtkButtonWidget | Create an elliptical button.
 [Game](/Cxx/Interaction/Game) | vtkInteractorStyleTrackballActor | Move a cube into a sphere.
-[HighlightPickedActor](/Cxx/Picking/HighlightPickedActor) | vtkPropPicker | Highlight a picked actor.
+[HighlightPickedActor](/Cxx/Picking/HighlightPickedActor) | vtkPropPicker | Highlight a picked actor by changing its color.
 [HighlightSelectedPoints](/Cxx/Picking/HighlightSelectedPoints) | vtkExtractGeometry | Highlight Selected Points.
 [HighlightSelection](/Cxx/Picking/HighlightSelection) | vtkExtractPolyDataGeometry | Highlight selection.
+[HighlightWithSilhouette](/Cxx/Picking/HighlightWithSilhouette) | vtkPropPicker vtkPolyDataSilhouette| Highlight a picked actor by adding a silhouette.
 [ImageClip](/Cxx/Interaction/ImageClip) | vtkImageClip | Demonstrates how to interactively select and display a region of an image.
 [ImageRegion](/Cxx/Interaction/ImageRegion) | vtkCommand | Select a region of an image.
 [InteractorStyleTerrain](/Cxx/Interaction/InteractorStyleTerrain) | vtkInteractorStyleTerrain | Terrain mode.

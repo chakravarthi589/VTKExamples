@@ -1,4 +1,4 @@
-# Python Examples
+﻿# Python Examples
 
 Please see [this page](https://www.vtk.org/Wiki/VTK/PythonDevelopment) to learn how to setup your environment to use VTK in Python.
 
@@ -253,6 +253,7 @@ This section includes examples of manipulating meshes.
 [ClipDataSetWithPolyData](/Python/Meshes/ClipDataSetWithPolyData) | vtkClipDataSet vtkImplicitPolyDataDistance vtkRectilinearGrid | clip a vtkRectilinearGrid with arbitrary polydata. In this example, use a vtkConeSource to generate polydata to slice the grid, resulting in an unstructured grid.
 [ClosedSurface](/Python/PolyData/ClosedSurface) | vtkFeatureEdges | Check if a surface is closed.
 [ColoredElevationMap](/Python/Meshes/ColoredElevationMap) | vtkLookupTable | Color a mesh by height.
+[Decimation](/Python/Meshes/Decimation) | vtkDecimatePro | Reduce the number of triangles in a mesh.
 [DeformPointSet](/Python/Meshes/DeformPointSet) | vtkDeformPointSet vtkElevationFilter | Use the vtkDeformPointSet filter to deform a vtkSphereSource with arbitrary polydata.
 [DelaunayMesh](/Python/Modelling/DelaunayMesh) | vtkDelaunay2D vtkMinimalStandardRandomSequence vtkExtractEdges vtkGlyph3D vtkTubeFilter | Two-dimensional Delaunay triangulation of a random set of points. Points and edges are shown highlighted with sphere glyphs and tubes.
 [PointInterpolator](/Python/Meshes/PointInterpolator) | vtkPointInterpolator | Plot a scalar field of points onto a PolyData surface.
@@ -547,7 +548,8 @@ See [this tutorial](http://www.vtk.org/Wiki/VTK/Tutorials/3DDataTypes) for a bri
 | Example Name | Classes Demonstrated | Description | Image |
 | -------------- | ---------------------- | ------------- | ------- |
 [CallBack](/Python/Interaction/CallBack) | vtkCallbackCommand vtkOrientationMarkerWidget | Setting up a callback with client data. Two different methods are demonstrated.
-[HighlightPickedActor](/Python/Interaction/HighlightPickedActor) | vtkPropPicker vtkInteractorStyleTrackballCamera | Pick and highlight an actor based on mouse clicks.
+[HighlightPickedActor](/Python/Picking/HighlightPickedActor) | vtkPropPicker vtkInteractorStyleTrackballCamera | Pick and highlight an actor based on mouse clicks.
+[HighlightWithSilhouette](/Python/Picking/HighlightWithSilhouette) | vtkPropPicker vtkPolyDataSilhouette| Highlight a picked actor by adding a silhouette.
 [MouseEvents](/Python/Interaction/MouseEvents) | vtkInteractorStyleTrackballCamera | Subclass the interactor style.
 [MouseEventsObserver](/Python/Interaction/MouseEventsObserver) | vtkCallbackCommand | Use an observer.
 

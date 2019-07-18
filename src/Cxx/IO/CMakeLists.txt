@@ -55,6 +55,7 @@ set(KIT_LIBS ${VTK_LIBRARIES})
 file(GLOB ALL_FILES *.cxx)
 
 Requires_GitLfs(DEMReader ALL_FILES)
+Requires_GitLfs(GLTFImporter ALL_FILES)
 Requires_GitLfs(ReadSLC ALL_FILES)
 
 foreach(SOURCE_FILE ${ALL_FILES})
@@ -80,6 +81,7 @@ if (BUILD_TESTING)
     DumpXMLFile
     ExportPolyDataScene
     GenericDataObjectReader
+    GLTFImporter
     ImageReader2Factory
     ImportPolyDataScene
     IndividualVRML
@@ -92,6 +94,7 @@ if (BUILD_TESTING)
     PNGWriter
     ReadAllPolyDataTypes
     ReadAllPolyDataTypesDemo
+    ReadAllUnstructuredGridTypes
     ReadBMP
     ReadCML
     ReadDICOM
@@ -149,6 +152,10 @@ if (BUILD_TESTING)
   add_test(${KIT}-GenericDataObjectReader ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestGenericDataObjectReader ${DATA}/Bunny.vtp)
 
+  if(GIT_LFS)
+    add_test(${KIT}-GLTFImporter ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+      TestGLTFImporter ${DATA}/gltf/FlightHelmet/glTF/FlightHelmet.gltf)
+    endif()
   add_test(${KIT}-IndividualVRML ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestIndividualVRML ${DATA}/teapot.wrl teapot)
 
@@ -181,6 +188,9 @@ if (BUILD_TESTING)
 
   add_test(${KIT}-ReadAllPolyDataTypesDemo ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestReadAllPolyDataTypesDemo ${DATA}/teapot.g ${DATA}/cowHead.vtp ${DATA}/horse.ply ${DATA}/trumpet.obj ${DATA}/42400-IDGH.stl ${DATA}/v.vtk)
+
+  add_test(${KIT}-ReadAllUnstructuredGridTypes ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+    TestReadAllUnstructuredGridTypes ${DATA}/blow.vtk)
 
   add_test(${KIT}-ReadBMP ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestReadBMP ${DATA}/masonry.bmp)

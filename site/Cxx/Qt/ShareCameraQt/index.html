@@ -176,24 +176,23 @@ function registerListener(event, func) {
 </pre></div> <p><strong>ShareCameraQt.h</strong></p> <div class=codehilite><pre><span></span><span class=cp>#ifndef ShareCameraQt_H</span>
 <span class=cp>#define ShareCameraQt_H</span>
 
-<span class=cp>#include</span> <span class=cpf>&lt;QMainWindow&gt;</span><span class=cp></span>
 <span class=cp>#include</span> <span class=cpf>&quot;ui_ShareCameraQt.h&quot;</span><span class=cp></span>
+<span class=cp>#include</span> <span class=cpf>&lt;QMainWindow&gt;</span><span class=cp></span>
 
 <span class=k>class</span> <span class=nc>ShareCameraQt</span> <span class=o>:</span> <span class=k>public</span> <span class=n>QMainWindow</span><span class=p>,</span> <span class=k>public</span> <span class=n>Ui</span><span class=o>::</span><span class=n>ShareCameraQt</span>
 <span class=p>{</span>
   <span class=n>Q_OBJECT</span>
 <span class=k>public</span><span class=o>:</span>
-
   <span class=c1>// Constructor/Destructor</span>
-  <span class=n>ShareCameraQt</span><span class=p>();</span> 
-  <span class=o>~</span><span class=n>ShareCameraQt</span><span class=p>()</span> <span class=p>{};</span>
+  <span class=n>ShareCameraQt</span><span class=p>();</span>
+  <span class=o>~</span><span class=n>ShareCameraQt</span><span class=p>()</span> <span class=o>=</span> <span class=k>default</span><span class=p>;</span>
 
 <span class=k>public</span> <span class=nl>slots</span><span class=p>:</span>
 
-  <span class=k>virtual</span> <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
+  <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
 
 <span class=k>protected</span><span class=o>:</span>
-   <span class=kt>void</span> <span class=n>ModifiedHandler</span><span class=p>();</span>
+  <span class=kt>void</span> <span class=n>ModifiedHandler</span><span class=p>();</span>
 <span class=p>};</span>
 
 <span class=cp>#endif</span>

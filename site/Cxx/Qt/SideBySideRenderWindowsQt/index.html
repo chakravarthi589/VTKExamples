@@ -162,18 +162,18 @@ function registerListener(event, func) {
 
 <span class=cp>#include</span> <span class=cpf>&quot;ui_SideBySideRenderWindowsQt.h&quot;</span><span class=cp></span>
 
-<span class=k>class</span> <span class=nc>SideBySideRenderWindowsQt</span> <span class=o>:</span> <span class=k>public</span> <span class=n>QMainWindow</span><span class=p>,</span> <span class=k>private</span> <span class=n>Ui</span><span class=o>::</span><span class=n>SideBySideRenderWindowsQt</span>
+<span class=k>class</span> <span class=nc>SideBySideRenderWindowsQt</span> <span class=o>:</span> <span class=k>public</span> <span class=n>QMainWindow</span><span class=p>,</span>
+                                  <span class=k>private</span> <span class=n>Ui</span><span class=o>::</span><span class=n>SideBySideRenderWindowsQt</span>
 <span class=p>{</span>
   <span class=n>Q_OBJECT</span>
 <span class=k>public</span><span class=o>:</span>
-
   <span class=c1>// Constructor/Destructor</span>
-  <span class=n>SideBySideRenderWindowsQt</span><span class=p>();</span> 
-  <span class=o>~</span><span class=n>SideBySideRenderWindowsQt</span><span class=p>()</span> <span class=p>{};</span>
+  <span class=n>SideBySideRenderWindowsQt</span><span class=p>();</span>
+  <span class=o>~</span><span class=n>SideBySideRenderWindowsQt</span><span class=p>()</span> <span class=o>=</span> <span class=k>default</span><span class=p>;</span>
 
 <span class=k>public</span> <span class=nl>slots</span><span class=p>:</span>
 
-  <span class=k>virtual</span> <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
+  <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
 <span class=p>};</span>
 
 <span class=cp>#endif</span>

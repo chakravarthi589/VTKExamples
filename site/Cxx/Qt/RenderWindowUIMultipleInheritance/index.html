@@ -128,17 +128,17 @@ function registerListener(event, func) {
 
 <span class=cp>#include</span> <span class=cpf>&lt;QMainWindow&gt;</span><span class=cp></span>
 
-<span class=k>class</span> <span class=nc>RenderWindowUIMultipleInheritance</span> <span class=o>:</span> <span class=k>public</span> <span class=n>QMainWindow</span><span class=p>,</span> <span class=k>private</span> <span class=n>Ui</span><span class=o>::</span><span class=n>RenderWindowUIMultipleInheritance</span>
+<span class=k>class</span> <span class=nc>RenderWindowUIMultipleInheritance</span>
+  <span class=o>:</span> <span class=k>public</span> <span class=n>QMainWindow</span><span class=p>,</span>
+    <span class=k>private</span> <span class=n>Ui</span><span class=o>::</span><span class=n>RenderWindowUIMultipleInheritance</span>
 <span class=p>{</span>
   <span class=n>Q_OBJECT</span>
 <span class=k>public</span><span class=o>:</span>
-
   <span class=n>RenderWindowUIMultipleInheritance</span><span class=p>();</span>
 
 <span class=k>public</span> <span class=nl>slots</span><span class=p>:</span>
 
-  <span class=k>virtual</span> <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
-
+  <span class=kt>void</span> <span class=n>slotExit</span><span class=p>();</span>
 <span class=p>};</span>
 
 <span class=cp>#endif</span>
@@ -215,7 +215,6 @@ function registerListener(event, func) {
 <span class=cp>#include</span> <span class=cpf>&lt;QVTKOpenGLNativeWidget.h&gt;</span><span class=cp></span>
 
 <span class=cp>#include</span> <span class=cpf>&quot;RenderWindowUIMultipleInheritance.h&quot;</span><span class=cp></span>
-
 
 <span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=kt>char</span><span class=o>**</span> <span class=n>argv</span><span class=p>)</span>
 <span class=p>{</span>

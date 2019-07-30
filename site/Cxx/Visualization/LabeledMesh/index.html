@@ -182,7 +182,8 @@ function registerListener(event, func) {
 <span class=hll>  <span class=c1>// Create the renderer here because vtkSelectVisiblePoints needs it.</span>
 </span><span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderer</span><span class=o>&gt;</span> <span class=n>ren1</span> <span class=o>=</span>
 </span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderer</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
-</span>
+</span>  <span class=n>ren1</span><span class=o>-&gt;</span><span class=n>UseHiddenLineRemovalOn</span><span class=p>();</span>
+
   <span class=c1>// Create labels for points</span>
 <span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkSelectVisiblePoints</span><span class=o>&gt;</span> <span class=n>visPts</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkSelectVisiblePoints</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>visPts</span><span class=o>-&gt;</span><span class=n>SetInputConnection</span><span class=p>(</span> <span class=n>ids</span><span class=o>-&gt;</span><span class=n>GetOutputPort</span><span class=p>()</span> <span class=p>);</span>
@@ -268,8 +269,10 @@ function registerListener(event, func) {
   <span class=s>vtkFiltersGeneral</span>
   <span class=s>vtkFiltersSources</span>
   <span class=s>vtkInteractionStyle</span>
+  <span class=s>vtkRenderingContextOpenGL2</span>
   <span class=s>vtkRenderingCore</span>
   <span class=s>vtkRenderingFreeType</span>
+  <span class=s>vtkRenderingGL2PSOpenGL2</span>
   <span class=s>vtkRenderingLabel</span>
   <span class=s>vtkRenderingOpenGL2</span> <span class=s>QUIET</span><span class=p>)</span>
 <span class=nb>if</span> <span class=p>(</span><span class=s>NOT</span> <span class=s>VTK_FOUND</span><span class=p>)</span>

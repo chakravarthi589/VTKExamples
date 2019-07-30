@@ -62,8 +62,9 @@ function registerListener(event, func) {
 <span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkActor.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkCamera.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkCellArray.h&gt;</span><span class=cp></span>
-</span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkMath.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkLine.h&gt;</span><span class=cp></span>
+</span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkMath.h&gt;</span><span class=cp></span>
+</span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkNamedColors.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkPolyData.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkPolyDataMapper.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkProperty.h&gt;</span><span class=cp></span>
@@ -72,77 +73,69 @@ function registerListener(event, func) {
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkRenderer.h&gt;</span><span class=cp></span>
 </span><span class=hll><span class=cp>#include</span> <span class=cpf>&lt;vtkRibbonFilter.h&gt;</span><span class=cp></span>
 </span>
-<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>char</span> <span class=o>*</span><span class=p>[])</span>
+<span class=kt>int</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>char</span><span class=o>*</span><span class=p>[])</span>
 <span class=p>{</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>colors</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkNamedColors</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+</span>
   <span class=c1>// Spiral parameters</span>
-  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>nV</span> <span class=o>=</span> <span class=mi>256</span><span class=p>;</span>      <span class=c1>// No. of vertices</span>
-  <span class=kt>double</span> <span class=n>vX</span><span class=p>,</span> <span class=n>vY</span><span class=p>,</span> <span class=n>vZ</span><span class=p>;</span>
-  <span class=kt>double</span> <span class=n>rS</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>              <span class=c1>// Spiral radius</span>
-  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>nCyc</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span>      <span class=c1>// No. of spiral cycles</span>
-  <span class=kt>double</span> <span class=n>h</span> <span class=o>=</span> <span class=mi>10</span><span class=p>;</span>              <span class=c1>// Height</span>
+  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>nV</span> <span class=o>=</span> <span class=mi>256</span><span class=p>;</span> <span class=c1>// No. of vertices</span>
+  <span class=kt>double</span> <span class=n>rS</span> <span class=o>=</span> <span class=mi>2</span><span class=p>;</span>         <span class=c1>// Spiral radius</span>
+  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>nCyc</span> <span class=o>=</span> <span class=mi>3</span><span class=p>;</span> <span class=c1>// No. of spiral cycles</span>
+  <span class=kt>double</span> <span class=n>h</span> <span class=o>=</span> <span class=mi>10</span><span class=p>;</span>         <span class=c1>// Height</span>
 
   <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>i</span><span class=p>;</span>
 
   <span class=c1>// Create points and cells for a spiral</span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPoints</span><span class=o>&gt;</span> <span class=n>points</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPoints</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
-</span>  <span class=k>for</span><span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>nV</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>points</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPoints</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+</span>  <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>nV</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
   <span class=p>{</span>
     <span class=c1>// Spiral coordinates</span>
-<span class=hll>    <span class=n>vX</span> <span class=o>=</span> <span class=n>rS</span> <span class=o>*</span> <span class=n>cos</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>vtkMath</span><span class=o>::</span><span class=n>Pi</span><span class=p>()</span> <span class=o>*</span> <span class=n>nCyc</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=p>(</span><span class=n>nV</span> <span class=o>-</span> <span class=mi>1</span><span class=p>));</span>
-</span><span class=hll>    <span class=n>vY</span> <span class=o>=</span> <span class=n>rS</span> <span class=o>*</span> <span class=n>sin</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>vtkMath</span><span class=o>::</span><span class=n>Pi</span><span class=p>()</span> <span class=o>*</span> <span class=n>nCyc</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=p>(</span><span class=n>nV</span> <span class=o>-</span> <span class=mi>1</span><span class=p>));</span>
-</span>    <span class=n>vZ</span> <span class=o>=</span> <span class=n>h</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=n>nV</span><span class=p>;</span>
+<span class=hll>    <span class=k>auto</span> <span class=n>vX</span> <span class=o>=</span> <span class=n>rS</span> <span class=o>*</span> <span class=n>cos</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>vtkMath</span><span class=o>::</span><span class=n>Pi</span><span class=p>()</span> <span class=o>*</span> <span class=n>nCyc</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=p>(</span><span class=n>nV</span> <span class=o>-</span> <span class=mi>1</span><span class=p>));</span>
+</span><span class=hll>    <span class=k>auto</span> <span class=n>vY</span> <span class=o>=</span> <span class=n>rS</span> <span class=o>*</span> <span class=n>sin</span><span class=p>(</span><span class=mi>2</span> <span class=o>*</span> <span class=n>vtkMath</span><span class=o>::</span><span class=n>Pi</span><span class=p>()</span> <span class=o>*</span> <span class=n>nCyc</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=p>(</span><span class=n>nV</span> <span class=o>-</span> <span class=mi>1</span><span class=p>));</span>
+</span>    <span class=k>auto</span> <span class=n>vZ</span> <span class=o>=</span> <span class=n>h</span> <span class=o>*</span> <span class=n>i</span> <span class=o>/</span> <span class=n>nV</span><span class=p>;</span>
     <span class=n>points</span><span class=o>-&gt;</span><span class=n>InsertPoint</span><span class=p>(</span><span class=n>i</span><span class=p>,</span> <span class=n>vX</span><span class=p>,</span> <span class=n>vY</span><span class=p>,</span> <span class=n>vZ</span><span class=p>);</span>
   <span class=p>}</span>
 
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkCellArray</span><span class=o>&gt;</span> <span class=n>lines</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkCellArray</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>lines</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkCellArray</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>lines</span><span class=o>-&gt;</span><span class=n>InsertNextCell</span><span class=p>(</span><span class=n>nV</span><span class=p>);</span>
   <span class=k>for</span> <span class=p>(</span><span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>nV</span><span class=p>;</span> <span class=n>i</span><span class=o>++</span><span class=p>)</span>
   <span class=p>{</span>
     <span class=n>lines</span><span class=o>-&gt;</span><span class=n>InsertCellPoint</span><span class=p>(</span><span class=n>i</span><span class=p>);</span>
   <span class=p>}</span>
 
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyData</span><span class=o>&gt;</span> <span class=n>polyData</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyData</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>polyData</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyData</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>polyData</span><span class=o>-&gt;</span><span class=n>SetPoints</span><span class=p>(</span><span class=n>points</span><span class=p>);</span>
   <span class=n>polyData</span><span class=o>-&gt;</span><span class=n>SetLines</span><span class=p>(</span><span class=n>lines</span><span class=p>);</span>
 
   <span class=c1>// Create a mapper and actor</span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;</span> <span class=n>lineMapper</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>lineMapper</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>lineMapper</span><span class=o>-&gt;</span><span class=n>SetInputData</span><span class=p>(</span><span class=n>polyData</span><span class=p>);</span>
 
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;</span> <span class=n>lineActor</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>lineActor</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>lineActor</span><span class=o>-&gt;</span><span class=n>SetMapper</span><span class=p>(</span><span class=n>lineMapper</span><span class=p>);</span>
-  <span class=n>lineActor</span><span class=o>-&gt;</span><span class=n>GetProperty</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>SetColor</span><span class=p>(</span><span class=mf>.8</span><span class=p>,</span> <span class=mf>.4</span><span class=p>,</span> <span class=mf>.2</span><span class=p>);</span>
+  <span class=n>lineActor</span><span class=o>-&gt;</span><span class=n>GetProperty</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>SetColor</span><span class=p>(</span><span class=n>colors</span><span class=o>-&gt;</span><span class=n>GetColor3d</span><span class=p>(</span><span class=s>&quot;Tomato&quot;</span><span class=p>).</span><span class=n>GetData</span><span class=p>());</span>
   <span class=n>lineActor</span><span class=o>-&gt;</span><span class=n>GetProperty</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>SetLineWidth</span><span class=p>(</span><span class=mi>3</span><span class=p>);</span>
 
   <span class=c1>// Create a ribbon around the line</span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRibbonFilter</span><span class=o>&gt;</span> <span class=n>ribbonFilter</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRibbonFilter</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>ribbonFilter</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRibbonFilter</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>ribbonFilter</span><span class=o>-&gt;</span><span class=n>SetInputData</span><span class=p>(</span><span class=n>polyData</span><span class=p>);</span>
   <span class=n>ribbonFilter</span><span class=o>-&gt;</span><span class=n>SetWidth</span><span class=p>(</span><span class=mf>.4</span><span class=p>);</span>
 
   <span class=c1>// Create a mapper and actor</span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;</span> <span class=n>ribbonMapper</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>ribbonMapper</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkPolyDataMapper</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>ribbonMapper</span><span class=o>-&gt;</span><span class=n>SetInputConnection</span><span class=p>(</span><span class=n>ribbonFilter</span><span class=o>-&gt;</span><span class=n>GetOutputPort</span><span class=p>());</span>
 
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;</span> <span class=n>ribbonActor</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>ribbonActor</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkActor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>ribbonActor</span><span class=o>-&gt;</span><span class=n>SetMapper</span><span class=p>(</span><span class=n>ribbonMapper</span><span class=p>);</span>
 
   <span class=c1>// Create a renderer, render window, and interactor</span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderer</span><span class=o>&gt;</span> <span class=n>renderer</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderer</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>renderer</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderer</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindow</span><span class=o>&gt;</span> <span class=n>renderWindow</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindow</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+<span class=hll>  <span class=k>auto</span> <span class=n>renderWindow</span> <span class=o>=</span> <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindow</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>renderWindow</span><span class=o>-&gt;</span><span class=n>AddRenderer</span><span class=p>(</span><span class=n>renderer</span><span class=p>);</span>
 
-<span class=hll>  <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindowInteractor</span><span class=o>&gt;</span> <span class=n>renderWindowInteractor</span> <span class=o>=</span>
-</span><span class=hll>    <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindowInteractor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
+  <span class=k>auto</span> <span class=n>renderWindowInteractor</span> <span class=o>=</span>
+<span class=hll>      <span class=n>vtkSmartPointer</span><span class=o>&lt;</span><span class=n>vtkRenderWindowInteractor</span><span class=o>&gt;::</span><span class=n>New</span><span class=p>();</span>
 </span>  <span class=n>renderWindowInteractor</span><span class=o>-&gt;</span><span class=n>SetRenderWindow</span><span class=p>(</span><span class=n>renderWindow</span><span class=p>);</span>
 
   <span class=c1>// Add the actor to the scene</span>
@@ -150,7 +143,7 @@ function registerListener(event, func) {
   <span class=n>renderer</span><span class=o>-&gt;</span><span class=n>AddActor</span><span class=p>(</span><span class=n>lineActor</span><span class=p>);</span>
 
   <span class=c1>// Render and interact</span>
-  <span class=n>renderer</span><span class=o>-&gt;</span><span class=n>SetBackground</span><span class=p>(</span><span class=mf>.2</span><span class=p>,</span> <span class=mf>.3</span><span class=p>,</span> <span class=mf>.4</span><span class=p>);</span>
+  <span class=n>renderer</span><span class=o>-&gt;</span><span class=n>SetBackground</span><span class=p>(</span><span class=n>colors</span><span class=o>-&gt;</span><span class=n>GetColor3d</span><span class=p>(</span><span class=s>&quot;SteelBlue&quot;</span><span class=p>).</span><span class=n>GetData</span><span class=p>());</span>
 
   <span class=c1>// Generate an interesting view</span>
   <span class=n>renderer</span><span class=o>-&gt;</span><span class=n>GetActiveCamera</span><span class=p>()</span><span class=o>-&gt;</span><span class=n>Azimuth</span><span class=p>(</span><span class=mi>40</span><span class=p>);</span>
@@ -168,12 +161,15 @@ function registerListener(event, func) {
 <span class=nb>project</span><span class=p>(</span><span class=s>RibbonFilter</span><span class=p>)</span>
 
 <span class=nb>find_package</span><span class=p>(</span><span class=s>VTK</span> <span class=s>COMPONENTS</span> 
+  <span class=s>vtkCommonColor</span>
   <span class=s>vtkCommonCore</span>
   <span class=s>vtkCommonDataModel</span>
   <span class=s>vtkFiltersModeling</span>
   <span class=s>vtkInteractionStyle</span>
+  <span class=s>vtkRenderingContextOpenGL2</span>
   <span class=s>vtkRenderingCore</span>
   <span class=s>vtkRenderingFreeType</span>
+  <span class=s>vtkRenderingGL2PSOpenGL2</span>
   <span class=s>vtkRenderingOpenGL2</span> <span class=s>QUIET</span><span class=p>)</span>
 <span class=nb>if</span> <span class=p>(</span><span class=s>NOT</span> <span class=s>VTK_FOUND</span><span class=p>)</span>
   <span class=nb>message</span><span class=p>(</span><span class=s2>&quot;Skipping RibbonFilter: ${VTK_NOT_FOUND_MESSAGE}&quot;</span><span class=p>)</span>

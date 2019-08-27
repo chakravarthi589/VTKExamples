@@ -245,6 +245,7 @@ These examples demonstrate how to create an display one of the many vtkParametri
 | Example Name | Classes Demonstrated | Description | Image |
 | -------------- | ---------------------- | ------------- | ------- |
 [BandedPolyDataContourFilter](/Cxx/VisualizationAlgorithms/BandedPolyDataContourFilter) | vtkBandedPolyDataContourFilter | Create filled contours.
+[BooleanOperationImplicitFunctions](/Cxx/ImplicitFunctions/BooleanOperationImplicitFunctions) | vtkImplicitBoolean | Demonstrate booleans of two different implicit functions
 [ContourTriangulator](/Cxx/Modelling/ContourTriangulator) | vtkMarchingSquares vtkContourTriangulator | Create a contour from a structured point set (image) and triangulate it.
 [CutWithCutFunction](/Cxx/VisualizationAlgorithms/CutWithCutFunction) | vtkCutter | Cut a surface with an implicit plane using vtkCutter.
 [CutWithScalars](/Cxx/VisualizationAlgorithms/CutWithScalars) | vtkContourFilter | Cut a surface with scalars.
@@ -265,9 +266,11 @@ These examples demonstrate how to create an display one of the many vtkParametri
 [MarchingCasesD](/Cxx/VisualizationAlgorithms/MarchingCasesD) | vtkMarchingCubes | Marching cubes. Case 7 is rotated 180 degrees about the y-axis with no label.
 [MarchingCubes](/Cxx/Modelling/MarchingCubes) | vtkMarchingCubes | Create a voxelized sphere.
 [MarchingSquares](/Cxx/Modelling/MarchingSquares) | vtkMarchingSquares | Create a contour from a structured point set (image).
+[ImplicitQuadric](/Cxx/ImplicitFunctions/ImplicitQuadric | vtkQuadric | Create an ellipsoid using an implicit quadric.
 [SampleFunction](/Cxx/ImplicitFunctions/SampleFunction) | vtkSampleFunction | Sample and visualize an implicit function.
 [ShepardInterpolation](/Cxx/Visualization/ShepardInterpolation) | vtkShepardMethod vtkProbeFilter vtkContourFilter | Interpolate scalar data.
 [SmoothDiscreteMarchingCubes](/Cxx/Modelling/SmoothDiscreteMarchingCubes) | vtkDiscreteMarchingCubes vtkWindowedSincPolyDataFilter | Generate smooth surfaces from labeled data.
+[ImplicitSphere1](/Cxx/ImplicitFunctions/ImplicitSphere1) | vtkSphere | Demonstrate sampling of a sphere implicit function.
 
 ## Working with 3D Data
 
@@ -369,6 +372,7 @@ These examples demonstrate how to create an display one of the many vtkParametri
 [Reflection](/Cxx/PolyData/Reflection) | vtkReflectionFilter | Mirror a DataSet.
 [RemoveOutsideSurface](/Cxx/PolyData/RemoveOutsideSurface) | vtkConnectivityFilter | Remove the outer surface of a multiple surface polydata.
 [RemoveVertices](/Cxx/PolyData/RemoveVertices) |  |
+[ResampleAppendedPolyData](/Cxx/PolyData/ResampleAppendedPolyData) | vtkCellLocator vtkPlaneSource vtkAppendPolyData | Resample a flat terrain containing multiple objects.
 [ResamplePolyLine](/Cxx/PolyData/ResamplePolyLine) |  |
 [ReverseSense](/Cxx/PolyData/ReverseSense) | vtkReverseSense | Flip normals.
 [RibbonFilter](/Cxx/PolyData/RibbonFilter) | vtkRibbonFilter |

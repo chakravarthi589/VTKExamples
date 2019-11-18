@@ -4,6 +4,7 @@ if(NOT VTK_BINARY_DIR)
   set(VTK_LIBRARIES "")
   find_package(VTK COMPONENTS
     vtkCommonColor
+    CommonComputationalGeometry
     vtkCommonCore
     vtkCommonDataModel
     vtkCommonSystem
@@ -11,6 +12,7 @@ if(NOT VTK_BINARY_DIR)
     vtkFiltersCore
     vtkFiltersGeneral
     vtkFiltersGeometry
+    FiltersModeling
     vtkFiltersSources
     vtkIOGeometry
     vtkIOImage
@@ -23,6 +25,8 @@ if(NOT VTK_BINARY_DIR)
     vtkImagingSources
     vtkInteractionImage
     vtkInteractionStyle
+    InteractionWidgets
+    RenderingAnnotation
     vtkRenderingContextOpenGL2
     vtkRenderingCore
     vtkRenderingFreeType
@@ -39,9 +43,19 @@ endif()
 
 set(KIT_LIBS ${VTK_LIBRARIES})
 
+set(RECENT_SRCS
+  PhysicallyBasedRendering.cxx
+  Skybox_PBR.cxx
+)
+
 #
 # Build all .cxx files in the directory
 file(GLOB ALL_FILES *.cxx)
+
+if(VTK_VERSION VERSION_LESS "8.90.0")
+  list(REMOVE_ITEM ALL_FILES ${RECENT_SRCS})
+endif()
+
 foreach(SOURCE_FILE ${ALL_FILES})
   string(REPLACE ".cxx" "" TMP ${SOURCE_FILE})
   string(REPLACE ${CMAKE_CURRENT_SOURCE_DIR}/ "" EXAMPLE ${TMP})
@@ -75,6 +89,15 @@ if (BUILD_TESTING)
     WalkCowA
     WalkCowB
     )
+
+  if( NOT VTK_VERSION VERSION_LESS "8.90.0")
+    set(NEEDS_ARGS
+        ${NEEDS_ARGS}
+        PhysicallyBasedRendering
+        Skybox_PBR
+    )
+  endif()
+
   set(DATA ${WikiExamples_SOURCE_DIR}/src/Testing/Data)
   set(TEMP ${WikiExamples_BINARY_DIR}/Testing/Temporary)
 
@@ -122,6 +145,15 @@ if (BUILD_TESTING)
 
   add_test(${KIT}-WalkCowB ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
     TestWalkCowB ${DATA}/cow.g 2)
+
+  if( NOT VTK_VERSION VERSION_LESS "8.90.0")
+    add_test(${KIT}-PhysicallyBasedRendering ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+      TestPhysicallyBasedRendering ${DATA}/skyboxes/skybox2/ ${DATA}/vtk_Material.png
+       ${DATA}/vtk_Base_Color.png ${DATA}/vtk_Normal.png ${DATA}/vtk_dark_bkg.png Boy)
+    add_test(${KIT}-Skybox_PBR ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${KIT}CxxTests
+      TestSkybox_PBR ${DATA}/skyboxes/skybox2 Boy)
+  endif()
+
 
   include(${WikiExamples_SOURCE_DIR}/CMake/ExamplesTesting.cmake)
 

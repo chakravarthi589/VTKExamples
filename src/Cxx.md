@@ -857,6 +857,7 @@ This section includes vtkUnstructuredGrid.
 [Mace](/Cxx/Rendering/Mace) |  | An example of multiple inputs and outputs.
 [Model](/Cxx/Rendering/Model) | vtkRenderer vtkRenderWindow vtkRenderWindowInteractor | Illustrative diagram of graphics objects.
 [MotionBlur](/Cxx/Rendering/MotionBlur) | vtkRenderStepsPass vtkSimpleMotionBlurPass | Example of motion blur.
+[PhysicallyBasedRendering](/Cxx/Rendering/PhysicallyBasedRendering) | vtkSkybox vtkTexture | Demonstrates physically based rendering, image based lighting, texturing and a skybox.
 [Rainbow](/Cxx/Rendering/Rainbow) | vtkLookupTable | Use and manipulation of vtkLookupTables.
 [Rotations](/Cxx/Rendering/Rotations) | vtkActor::RotateX,Y,Z vtkRenderer::EraseOff | Rotations of a cow about her axes.
 [RotationsA](/Cxx/Rendering/RotationsA) | vtkActor::RotateX,Y,Z vtkRenderer::EraseOff | Perform six rotations of a cow about her x-axis (Figure 3-31a).
@@ -864,6 +865,7 @@ This section includes vtkUnstructuredGrid.
 [RotationsC](/Cxx/Rendering/RotationsC) | vtkActor::RotateX,Y,Z vtkRenderer::EraseOff | Perform six rotations of a cow about her z-axis (Figure 3-31c).
 [RotationsD](/Cxx/Rendering/RotationsD) | vtkActor::RotateX,Y,Z vtkRenderer::EraseOff | First a rotation of a cow about her x-axis, then six rotations about her y-axis (Figure 3-31d).
 [Shadows](/Cxx/Rendering/Shadows) | vtkCameraPass vtkRenderStepsPass vtkSequencePass vtkShadowMapBakerPass vtkShadowMapPass | Draw model with shadows.
+[Skybox_PBR](/Cxx/Rendering/Skybox_PBR) | vtkSkybox vtkTexture | Demonstrates physically based rendering, image based lighting and a skybox.
 [SpecularSpheres](/Cxx/Rendering/SpecularSpheres) | vtkProperty | Demonstrates the effect of specular lighting on spheres.
 [StippledLine](/Cxx/Rendering/StippledLine) | vtkTexture | Draw a stippled line.
 [StringToImageDemo](/Cxx/Rendering/StringToImageDemo) | vtkImageBlend vtkFreeTypeTools | Demonstrates how to generate images from strings.
@@ -1348,7 +1350,7 @@ See [this tutorial](http://www.vtk.org/Wiki/VTK/Tutorials/3DDataTypes) for a bri
 [AnimationScene](/Cxx/Utilities/AnimationScene) | vtkAnimationScene vtkAnimationCue | Animation (the right way). Zoom in on a sphere.
 [DataAnimation](/Cxx/Utilities/DataAnimation) | vtkCallbackCommand vtkProgrammableFilter | Data Animation. Update points in a dataset every specified interval.
 [DataAnimationSubclass](/Cxx/Utilities/DataAnimationSubclass) | vtkCommand vtkProgrammableFilter | Update points in a dataset every specified interval (using a vtkCommand subclass instead of a callback function.
-[RotatingSphere](/Cxx/Animation/RotatingSphere) | vtkSphereSource | A rotating sphere. 
+[RotatingSphere](/Cxx/Animation/RotatingSphere) | vtkSphereSource | A rotating sphere.
 
 ## Geographic Visualization (Geovis)
 

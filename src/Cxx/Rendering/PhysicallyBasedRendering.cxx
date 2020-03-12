@@ -46,6 +46,10 @@
 #include <sstream>
 #include <string>
 
+#if VTK_VERSION_NUMBER >= 90000000000ULL
+#define VTK_VER_GT_8_90 1
+#endif
+
 namespace {
 /**
  * Show the command lime parameters.
@@ -404,7 +408,11 @@ int main(int argc, char* argv[])
   actor->GetProperty()->SetNormalScale(normalScale);
 
   renderer->UseImageBasedLightingOn();
+#if VTK_VER_GT_8_90
+  renderer->SetEnvironmentTexture(cubemap);
+#else
   renderer->SetEnvironmentCubeMap(cubemap);
+#endif
   renderer->SetBackground(colors->GetColor3d("BkgColor").GetData());
   renderer->AddActor(actor);
 
@@ -511,17 +519,18 @@ bool VTKVersionOk(unsigned long long const& major,
   unsigned long long vtk_version_number =
       10000000000ULL * ver->GetVTKMajorVersion() +
       100000000ULL * ver->GetVTKMinorVersion() + ver->GetVTKBuildVersion();
-  if (vtk_version_number <= neededVersion)
+  if (vtk_version_number >= neededVersion)
   {
     return true;
   }
-#else
-  if (VTK_VERSION_NUMBER <= neededVersion)
-  {
-    return true;
-  }
-#endif
   return false;
+#else
+  if (VTK_VERSION_NUMBER >= neededVersion)
+  {
+    return true;
+  }
+  return false;
+#endif
 }
 
 vtkSmartPointer<vtkPolyData> GetBoy()

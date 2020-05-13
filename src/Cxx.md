@@ -544,7 +544,7 @@ This section includes vtkImageData vtkStructuredGrid and vtkRectilinearGrid.
 [BlankPoint](/Cxx/StructuredGrid/BlankPoint) | vtkStructuredGrid | Blank a point of a vtkStructuredGrid.
 [GetLinearPointId](/Cxx/StructuredGrid/GetLinearPointId) | vtkStructuredGrid | Get the linear point id of a point in a grid.
 [SGrid](/Cxx/StructuredGrid/SGrid) | vtkStructuredGrid | Creating a structured grid dataset of a semi-cylinder. Vectors are created whose magnitude is proportional to radius and oriented in tangential direction.
-[StructuredGrid](/Cxx/StructuredGrid/StructuredGrid) | vtkStructuredGrid | Structured Grid.
+[StructuredGrid](/Cxx/StructuredGrid/StructuredGrid) | vtkStructuredGrid vtkCellData vtkCellIterator | Reads and writes points into a structured grid. The grid is also colored by point data and how to iterate through the structured grid is demonstrated.
 [StructuredGridOutline](/Cxx/StructuredGrid/StructuredGridOutline) | vtkStructuredGridOutlineFilter | Visualize the outline of a structured grid.
 [VisualizeStructuredGrid](/Cxx/StructuredGrid/VisualizeStructuredGrid) | vtkStructuredGridGeometryFilter | Visualize the points of a structured grid.
 [VisualizeStructuredGridCells](/Cxx/StructuredGrid/VisualizeStructuredGridCells) | vtkShrinkFilter | Visualize the cells of a structured grid.
@@ -661,7 +661,6 @@ This section includes vtkUnstructuredGrid.
 [TimerLog](/Cxx/Utilities/TimerLog) | vtkTimerLog | Timer log.
 [Variant](/Cxx/Utilities/Variant) | vtkVariant | Convert between data types.
 [Vector](/Cxx/Utilities/Vector) | vtkVector | Mathematical vector class.
-[VersionMacros](/Cxx/Utilities/VersionMacros) | Macro/#define's | Check VTK Version.
 [ViewportBorders](/Cxx/Utilities/ViewportBorders) |  | Draw a border around each viewport.
 [VisualDebugging](/Cxx/Demos/VisualDebugging) |  | Update the screen from inside an algorithm.
 [ZBuffer](/Cxx/Utilities/ZBuffer) | vtkRenderer | zbuffer.
@@ -700,7 +699,6 @@ This section includes vtkUnstructuredGrid.
 
 | Example Name | Classes Demonstrated | Description | Image |
 | -------------- | ---------------------- | ------------- | ------- |
-[Check VTK Version in CMake](/Cxx/Utilities/CMakeVTKVersionCheck) |  |
 [Check if a specific module is present](/Cxx/CMakeTechniques/CheckForModule) |  |
 
 ## Math Operations
